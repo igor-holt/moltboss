@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useKV } from '@github/spark/hooks'
 import { toast } from 'sonner'
 import { Toaster } from '@/components/ui/sonner'
@@ -8,6 +8,7 @@ import { ContentCard } from '@/components/ContentCard'
 import { FavoriteCard } from '@/components/FavoriteCard'
 import { EmptyState } from '@/components/EmptyState'
 import { PullToRefresh } from '@/components/PullToRefresh'
+import { CategoryFilter } from '@/components/CategoryFilter'
 import { contentItems } from '@/data/content'
 import { ContentItem } from '@/types'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -16,6 +17,19 @@ function App() {
   const [favorites, setFavorites] = useKV<string[]>('favorites', [])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [activeTab, setActiveTab] = useState('feed')
+  const [selectedCategory, setSelectedCategory] = useState('All')
+
+  const categories = useMemo(() => {
+    const uniqueCategories = Array.from(new Set(contentItems.map(item => item.category)))
+    return ['All', ...uniqueCategories.sort()]
+  }, [])
+
+  const filteredContent = useMemo(() => {
+    if (selectedCategory === 'All') {
+      return contentItems
+    }
+    return contentItems.filter(item => item.category === selectedCategory)
+  }, [selectedCategory])
 
   const handleLike = (itemId: string) => {
     setFavorites((current) => {
@@ -48,19 +62,26 @@ function App() {
   const handleRefresh = async () => {
     await new Promise(resolve => setTimeout(resolve, 1000))
     setCurrentIndex(0)
+    setSelectedCategory('All')
     toast.success('Feed refreshed')
   }
 
   const favoriteItems = contentItems.filter(item => favorites?.includes(item.id))
-  const currentItem = contentItems[currentIndex]
+  const currentItem = filteredContent[currentIndex]
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const element = e.currentTarget
     const scrollPercentage = (element.scrollTop + element.clientHeight) / element.scrollHeight
     
-    if (scrollPercentage > 0.8 && currentIndex < contentItems.length - 1) {
+    if (scrollPercentage > 0.8 && currentIndex < filteredContent.length - 1) {
       setCurrentIndex(current => current + 1)
     }
+  }
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category)
+    setCurrentIndex(0)
+    toast.success(`Showing ${category === 'All' ? 'all content' : category}`)
   }
 
   return (
@@ -77,6 +98,12 @@ function App() {
       </header>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col">
+        <CategoryFilter 
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onCategoryChange={handleCategoryChange}
+        />
+        
         <main className="flex-1 overflow-hidden">
           <TabsContent value="feed" className="h-full m-0">
             <PullToRefresh onRefresh={handleRefresh}>
@@ -86,7 +113,7 @@ function App() {
               >
                 <div className="container max-w-2xl mx-auto px-4 py-6 space-y-6">
                   <AnimatePresence mode="wait">
-                    {contentItems.slice(0, currentIndex + 1).map((item) => (
+                    {filteredContent.slice(0, currentIndex + 1).map((item) => (
                       <motion.div
                         key={item.id}
                         initial={{ opacity: 0, y: 50 }}
@@ -104,7 +131,7 @@ function App() {
                     ))}
                   </AnimatePresence>
 
-                  {currentIndex >= contentItems.length - 1 && (
+                  {currentIndex >= filteredContent.length - 1 && (
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}

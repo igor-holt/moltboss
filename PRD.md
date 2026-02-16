@@ -40,8 +40,16 @@ This is a content browsing application with gesture interactions, persistent sta
 - **Progression**: User drags down → Visual indicator appears → Release past threshold → Loading animation → New content appears → Feed resets to top
 - **Success criteria**: Smooth animation, clear loading state, instant feedback
 
+### Category Filtering
+- **Functionality**: Horizontal scrollable filter bar showing category chips (All, Art, Photography, Design, Music) that filters content in the feed
+- **Purpose**: Allows users to discover specific types of content without scrolling through irrelevant items
+- **Trigger**: User taps a category chip in the filter bar below the header
+- **Progression**: User taps category → Feed instantly updates to show only matching content → Selected chip highlights with primary color → Toast confirms filter applied
+- **Success criteria**: Instant filtering response, clear visual feedback on active category, smooth scroll in filter bar
+
 ## Edge Case Handling
 - **Empty Favorites**: Show an encouraging empty state with an icon and message guiding users to heart items from the feed
+- **Empty Category**: When a filtered category has no items, show "No content in this category" message
 - **Network Errors**: Display a friendly error message with a retry button when content fails to load
 - **Rapid Interactions**: Debounce like/share actions to prevent duplicate saves or spam
 - **End of Feed**: Show a "You're all caught up!" message when user reaches the last item
@@ -81,34 +89,38 @@ Animations should reinforce the mobile-native feel with spring physics and gestu
   - Card: Content container with image, title, description, and action buttons (custom with elevated shadow and rounded corners)
   - Button: Primary and ghost variants for navigation and actions (shadcn Button with custom styling)
   - Tabs: Bottom navigation for switching between Feed and Favorites (shadcn Tabs with mobile-optimized touch targets)
-  - ScrollArea: Smooth scrolling container for content feed (shadcn ScrollArea)
+  - ScrollArea: Smooth scrolling container for content feed and horizontal category filter (shadcn ScrollArea)
   - Badge: Status indicators and tags on content cards (shadcn Badge)
   - Toast: Feedback for actions like liking and sharing (sonner)
 - **Customizations**: 
   - Custom CardStack component for swipeable content cards with gesture handlers
   - Custom HeartButton with animated SVG that scales and changes color on interaction
   - Custom PullToRefresh wrapper with elastic physics
+  - Custom CategoryFilter with horizontal scrolling pill buttons
 - **States**: 
   - Buttons: Default (gradient background), Pressed (scale 0.95 + darker), Disabled (50% opacity)
+  - Category Pills: Inactive (secondary background), Active (primary background + shadow), Pressed (scale 0.95)
   - Cards: Default (elevated), Hover/Press (scale 1.02), Swiping (transform follows gesture)
   - Heart: Unliked (outline), Liked (filled + scale pulse), Animating (spring bounce)
 - **Icon Selection**: 
   - Heart for likes (Phosphor Heart/HeartFilled)
   - Share for sharing (Phosphor ShareFat)
   - Grid for favorites (Phosphor SquaresFour)
-  - Feed for home (Phosphor Squares)
+  - Feed for home (Phosphor Sparkle)
   - Arrow for navigation (Phosphor ArrowLeft)
 - **Spacing**: 
   - Container padding: px-4 (16px) for main content
+  - Category filter: py-3 (12px vertical), gap-2 (8px between chips)
   - Card gaps: gap-4 (16px) between cards in feed
   - Section spacing: mb-6 (24px) between major sections
   - Button padding: px-6 py-3 for primary CTAs (24px/12px)
   - Grid gaps: gap-3 (12px) for favorites grid
 - **Mobile**: 
   - Single column layout throughout
+  - Horizontal scrolling category filter with pill buttons below header
   - Bottom navigation bar (sticky) with large touch targets (min 44px)
   - Cards occupy 90% viewport width with side margins for swipe affordance
   - Favorites grid uses 2 columns on mobile, 3 on larger devices
   - Pull-to-refresh gesture enabled only on feed view
   - Safe area padding for notched devices
-  - Horizontal scroll disabled to prevent conflicts with swipe gestures
+  - Horizontal scroll disabled on main feed to prevent conflicts with swipe gestures
