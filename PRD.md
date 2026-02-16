@@ -41,11 +41,18 @@ This is an agent management and conversation interface with persistent state for
 - **Success criteria**: Conversations persist, sorted by recent activity, clear agent identification
 
 ### Quick Actions
-- **Functionality**: Pin important agents, mark conversations as favorites, quick-start new conversations
-- **Purpose**: Streamline repeated interactions with frequently used agents
-- **Trigger**: User taps pin icon on agent card or star icon on conversation
-- **Progression**: User taps action → Visual feedback → Item marked/pinned → Appears in favorites section
+- **Functionality**: Pin important agents, mark conversations as favorites, quick-start new conversations, export conversations, share conversation links
+- **Purpose**: Streamline repeated interactions with frequently used agents and enable easy sharing/archiving of conversations
+- **Trigger**: User taps pin icon on agent card, star icon on conversation, or export/share button in conversation view
+- **Progression**: User taps action → Visual feedback → Item marked/pinned/exported → Appears in favorites section or downloads file
 - **Success criteria**: Actions respond within 100ms, state persists, visual confirmation
+
+### Conversation Export & Sharing
+- **Functionality**: Export conversations in multiple formats (JSON, Markdown, Text) and generate shareable links
+- **Purpose**: Enable users to archive important conversations, share insights with others, or transfer data between systems
+- **Trigger**: User taps share/export button in conversation view or conversation card
+- **Progression**: Select export → Choose format (JSON/Markdown/Text) → File downloads or content copied to clipboard → Success confirmation
+- **Success criteria**: Multiple export formats available, clipboard integration works, shareable links can load conversations via URL
 
 ## Edge Case Handling
 - **No Agents Available**: Show empty state with message explaining agent loading or connection issues
@@ -96,7 +103,8 @@ Animations should be subtle and purposeful - focus on smooth transitions between
   - Badge: Status indicators and category tags (shadcn Badge)
   - Textarea: Message input for conversations (shadcn Textarea)
   - Avatar: Agent identification in conversation view (shadcn Avatar)
-  - Dialog: Agent details and conversation settings (shadcn Dialog)
+  - Dialog: Agent details, conversation settings, and share link display (shadcn Dialog)
+  - DropdownMenu: Export and share options menu (shadcn DropdownMenu)
   - Toast: Feedback for actions (sonner)
 - **Customizations**: 
   - Custom AgentCard component with capability tags and quick-start button
@@ -116,6 +124,11 @@ Animations should be subtle and purposeful - focus on smooth transitions between
   - Paper plane for send (Phosphor PaperPlaneTilt)
   - Pin for pinned agents (Phosphor PushPin)
   - Plus for new conversation (Phosphor Plus)
+  - Share for export/share menu (Phosphor Share)
+  - Download for export actions (Phosphor Download)
+  - Copy for clipboard actions (Phosphor Copy)
+  - Link for shareable links (Phosphor Link)
+  - Check for confirmation states (Phosphor Check)
 - **Spacing**: 
   - Container padding: px-4 md:px-6 (16px/24px)
   - Category filter: py-3 gap-2 (12px vertical, 8px horizontal)

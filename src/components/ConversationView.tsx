@@ -5,6 +5,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { PaperPlaneTilt, ArrowLeft } from '@phosphor-icons/react'
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { ExportShareMenu } from '@/components/ExportShareMenu'
 
 interface ConversationViewProps {
   conversation: Conversation
@@ -50,10 +51,11 @@ export function ConversationView({ conversation, onSendMessage, onBack }: Conver
             <ArrowLeft />
           </Button>
           <div className="text-2xl">{getAgentAvatar(conversation.agentId)}</div>
-          <div>
+          <div className="flex-1">
             <h2 className="font-semibold">{conversation.agentName}</h2>
             <p className="text-xs text-muted-foreground">Active</p>
           </div>
+          <ExportShareMenu conversation={conversation} />
         </div>
       </div>
 

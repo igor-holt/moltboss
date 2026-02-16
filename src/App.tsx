@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useKV } from '@github/spark/hooks'
 import { toast } from 'sonner'
 import { Toaster } from '@/components/ui/sonner'
@@ -18,6 +18,23 @@ function App() {
   const [activeTab, setActiveTab] = useState('agents')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [activeConversation, setActiveConversation] = useState<string | null>(null)
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const sharedConversationId = params.get('conversation')
+    
+    if (sharedConversationId && conversations) {
+      const conversation = conversations.find(c => c.id === sharedConversationId)
+      if (conversation) {
+        setActiveConversation(sharedConversationId)
+        setActiveTab('conversations')
+        toast.success('Loaded shared conversation')
+      } else {
+        toast.error('Conversation not found')
+      }
+      window.history.replaceState({}, '', window.location.pathname)
+    }
+  }, [conversations])
 
   const categories = useMemo(() => {
     const uniqueCategories = Array.from(new Set(agents.map(agent => agent.category)))

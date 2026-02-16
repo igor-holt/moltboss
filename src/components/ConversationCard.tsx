@@ -1,7 +1,8 @@
 import { Conversation } from '@/types'
 import { Card, CardContent } from '@/components/ui/card'
-import { ChatCircle, PushPin } from '@phosphor-icons/react'
+import { PushPin } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
+import { ExportShareMenu } from '@/components/ExportShareMenu'
 
 interface ConversationCardProps {
   conversation: Conversation
@@ -19,14 +20,11 @@ export function ConversationCard({ conversation, onClick }: ConversationCardProp
       transition={{ duration: 0.15 }}
       whileHover={{ scale: 1.01 }}
     >
-      <Card 
-        className="cursor-pointer border-border hover:border-primary/50 transition-colors"
-        onClick={() => onClick(conversation.id)}
-      >
+      <Card className="cursor-pointer border-border hover:border-primary/50 transition-colors">
         <CardContent className="p-4">
           <div className="flex items-start gap-3">
-            <div className="text-2xl">{getAgentAvatar(conversation.agentId)}</div>
-            <div className="flex-1 min-w-0">
+            <div className="text-2xl" onClick={() => onClick(conversation.id)}>{getAgentAvatar(conversation.agentId)}</div>
+            <div className="flex-1 min-w-0" onClick={() => onClick(conversation.id)}>
               <div className="flex items-center justify-between gap-2 mb-1">
                 <h3 className="font-medium truncate">{conversation.agentName}</h3>
                 <div className="flex items-center gap-2 shrink-0">
@@ -42,6 +40,9 @@ export function ConversationCard({ conversation, onClick }: ConversationCardProp
                   {lastMessage.content}
                 </p>
               )}
+            </div>
+            <div className="shrink-0" onClick={(e) => e.stopPropagation()}>
+              <ExportShareMenu conversation={conversation} />
             </div>
           </div>
         </CardContent>
