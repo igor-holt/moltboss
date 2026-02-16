@@ -1,8 +1,26 @@
-export interface ContentItem {
+export interface Agent {
   id: string
-  title: string
+  name: string
   description: string
-  imageUrl: string
+  capabilities: string[]
   category: string
-  color: string
+  status: 'available' | 'busy' | 'offline'
+  avatar: string
+}
+
+export interface Message {
+  id: string
+  content: string
+  sender: 'user' | 'agent'
+  timestamp: number
+  agentId?: string
+}
+
+export interface Conversation {
+  id: string
+  agentId: string
+  agentName: string
+  messages: Message[]
+  lastActivity: number
+  isPinned: boolean
 }

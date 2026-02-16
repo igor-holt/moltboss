@@ -1,126 +1,132 @@
 # Planning Guide
 
-A mobile-first social discovery feed where users can swipe through curated content cards with rich media, reactions, and quick actions.
+An agentic interface for Copilot to discover, engage with, and manage conversations with Moltbook.com bot agents.
 
 **Experience Qualities**: 
-1. **Fluid** - Interactions should feel smooth and responsive with gesture-based navigation that mimics native mobile apps
-2. **Engaging** - Content should be visually striking with high contrast and bold typography that commands attention
-3. **Intuitive** - Core actions accessible through familiar swipe gestures and prominent tap targets
+1. **Professional** - Clean, focused interface that prioritizes functionality and clarity for productive agent interactions
+2. **Efficient** - Quick access to agent discovery, conversation initiation, and context management without unnecessary friction
+3. **Intelligent** - Smart organization of agent capabilities, conversation history, and contextual suggestions
 
 **Complexity Level**: Light Application (multiple features with basic state)
-This is a content browsing application with gesture interactions, persistent state for liked items, and simple navigation - perfect for demonstrating mobile-first design patterns without overwhelming complexity.
+This is an agent management and conversation interface with persistent state for conversations, agent discovery, and interaction history - focused on enabling Copilot to effectively engage with Moltbook bot agents.
 
 ## Essential Features
 
-### Content Card Swiping
-- **Functionality**: Users can swipe through a vertical feed of content cards, each displaying an image, title, description, and action buttons
-- **Purpose**: Provides an engaging, mobile-native way to browse content that feels natural on touchscreens
-- **Trigger**: User scrolls or swipes vertically on the main feed
-- **Progression**: App loads → User sees first card → Swipe up/down to browse → Card animates out → Next card animates in → Repeat
-- **Success criteria**: Smooth 60fps animations, responsive touch gestures, cards load without visual jank
+### Agent Discovery
+- **Functionality**: Browse available Moltbook.com bot agents in a card-based interface showing agent name, capabilities, description, and specialization
+- **Purpose**: Allows Copilot to discover and understand available agents before initiating conversations
+- **Trigger**: User opens the app or navigates to the Agents tab
+- **Progression**: App loads → Display agent cards with metadata → User browses agents → Select agent → View detailed capabilities → Initiate conversation
+- **Success criteria**: All available agents displayed, clear capability descriptions, responsive selection
+
+### Conversation Management
+- **Functionality**: Create, view, and manage conversations with bot agents including message history and context
+- **Purpose**: Enables structured, persistent conversations between Copilot and Moltbook agents
+- **Trigger**: User selects an agent to start a conversation or selects an existing conversation
+- **Progression**: Select agent → Conversation view opens → Input message → Send to agent → Receive response → Continue dialogue → Save conversation
+- **Success criteria**: Messages persist across sessions, clear sender identification, real-time-feeling responses
+
+### Agent Filtering
+- **Functionality**: Filter agents by specialty/category (All, Data Analysis, Content Generation, Code Review, Research, etc.)
+- **Purpose**: Quickly find relevant agents for specific tasks without browsing full agent list
+- **Trigger**: User taps category filter in the agents view
+- **Progression**: User selects category → Agent list filters instantly → Active filter highlighted → Display filtered agents
+- **Success criteria**: Instant filtering, clear visual feedback, smooth transitions
+
+### Conversation History
+- **Functionality**: View all previous conversations with agents in a list view with timestamps and previews
+- **Purpose**: Quick access to past interactions and context retrieval
+- **Trigger**: User navigates to Conversations tab
+- **Progression**: Open conversations tab → Display list of conversations → Select conversation → Resume conversation or review history
+- **Success criteria**: Conversations persist, sorted by recent activity, clear agent identification
 
 ### Quick Actions
-- **Functionality**: Heart/like button and share button on each card for instant engagement
-- **Purpose**: Allows users to save favorite items and share content without interrupting browsing flow
-- **Trigger**: User taps heart icon or share icon on a card
-- **Progression**: User taps heart → Icon animates with scale/color change → Item saved to favorites → Toast confirms action
-- **Success criteria**: Action feedback within 100ms, persistent state across sessions, visual confirmation
-
-### Favorites Collection
-- **Functionality**: Dedicated view showing all hearted/liked items in a grid layout
-- **Purpose**: Lets users revisit content they enjoyed without scrolling through the entire feed again
-- **Trigger**: User taps favorites icon in navigation
-- **Progression**: User taps favorites → View transitions to grid layout → Shows all liked items → Tap card to view details → Back to favorites
-- **Success criteria**: Items persist across sessions, grid is responsive, empty state guides users
-
-### Pull to Refresh
-- **Functionality**: Users can pull down on the feed to load new content
-- **Purpose**: Provides a familiar mobile pattern for refreshing content and discovering new items
-- **Trigger**: User drags down from top of feed
-- **Progression**: User drags down → Visual indicator appears → Release past threshold → Loading animation → New content appears → Feed resets to top
-- **Success criteria**: Smooth animation, clear loading state, instant feedback
-
-### Category Filtering
-- **Functionality**: Horizontal scrollable filter bar showing category chips (All, Art, Photography, Design, Music) that filters content in the feed
-- **Purpose**: Allows users to discover specific types of content without scrolling through irrelevant items
-- **Trigger**: User taps a category chip in the filter bar below the header
-- **Progression**: User taps category → Feed instantly updates to show only matching content → Selected chip highlights with primary color → Toast confirms filter applied
-- **Success criteria**: Instant filtering response, clear visual feedback on active category, smooth scroll in filter bar
+- **Functionality**: Pin important agents, mark conversations as favorites, quick-start new conversations
+- **Purpose**: Streamline repeated interactions with frequently used agents
+- **Trigger**: User taps pin icon on agent card or star icon on conversation
+- **Progression**: User taps action → Visual feedback → Item marked/pinned → Appears in favorites section
+- **Success criteria**: Actions respond within 100ms, state persists, visual confirmation
 
 ## Edge Case Handling
-- **Empty Favorites**: Show an encouraging empty state with an icon and message guiding users to heart items from the feed
-- **Empty Category**: When a filtered category has no items, show "No content in this category" message
-- **Network Errors**: Display a friendly error message with a retry button when content fails to load
-- **Rapid Interactions**: Debounce like/share actions to prevent duplicate saves or spam
-- **End of Feed**: Show a "You're all caught up!" message when user reaches the last item
-- **Offline Mode**: Show cached favorites even when offline, with indicator that new content requires connection
+- **No Agents Available**: Show empty state with message explaining agent loading or connection issues
+- **Empty Conversations**: Encourage user to start first conversation with suggested agents
+- **Connection Errors**: Display retry mechanism when unable to reach Moltbook.com
+- **Long Messages**: Implement message truncation with expand option in conversation list
+- **Agent Unavailable**: Show status indicator and alternative agent suggestions
+- **Rate Limiting**: Display graceful message when API limits reached with retry timer
 
 ## Design Direction
-The design should feel energetic, youthful, and modern - like a social app that's meant to be browsed casually but with visual polish that rewards attention to detail. Bold colors, generous spacing, and fluid animations create a sense of premium quality while maintaining approachability.
+The interface should feel like a professional developer tool - clean, minimal, and focused on productivity. Think VS Code or GitHub's interface: dark theme, subtle accents, clear hierarchy, and no unnecessary decoration. The design should fade into the background and let the agent interactions be the focus.
 
 ## Color Selection
-A vibrant, high-energy palette with deep purples and electric accents that pop on mobile screens.
+A refined, technical palette with deep neutrals and precise accent colors that communicate professionalism and clarity.
 
-- **Primary Color**: Deep Purple (oklch(0.45 0.15 285)) - Represents creativity and modern tech, serves as the main brand color for primary actions and accents
+- **Primary Color**: Vibrant Blue (oklch(0.55 0.18 250)) - Represents intelligence and technology, used for primary actions and active states
 - **Secondary Colors**: 
-  - Midnight Background (oklch(0.15 0.02 280)) - Dark, slightly warm background that makes content cards pop
-  - Card Surface (oklch(0.22 0.03 285)) - Elevated surface color for content cards
-- **Accent Color**: Electric Cyan (oklch(0.75 0.15 195)) - Eye-catching highlight for CTAs, active states, and important UI elements like the heart animation
+  - Deep Slate Background (oklch(0.18 0.015 250)) - Professional dark background
+  - Elevated Surface (oklch(0.24 0.02 250)) - Card and panel surfaces
+  - Subtle Border (oklch(0.32 0.015 250)) - Dividers and borders
+- **Accent Color**: Electric Teal (oklch(0.70 0.14 190)) - Attention color for important actions, notifications, and highlights
 - **Foreground/Background Pairings**: 
-  - Background (oklch(0.15 0.02 280)): White text (oklch(0.98 0 0)) - Ratio 12.8:1 ✓
-  - Card (oklch(0.22 0.03 285)): White text (oklch(0.98 0 0)) - Ratio 10.5:1 ✓
-  - Primary (oklch(0.45 0.15 285)): White text (oklch(0.98 0 0)) - Ratio 4.9:1 ✓
-  - Accent (oklch(0.75 0.15 195)): Dark text (oklch(0.15 0.02 280)) - Ratio 7.2:1 ✓
+  - Background (oklch(0.18 0.015 250)): White text (oklch(0.98 0 0)) - Ratio 11.2:1 ✓
+  - Surface (oklch(0.24 0.02 250)): White text (oklch(0.98 0 0)) - Ratio 9.1:1 ✓
+  - Primary (oklch(0.55 0.18 250)): White text (oklch(0.98 0 0)) - Ratio 5.1:1 ✓
+  - Accent (oklch(0.70 0.14 190)): Dark text (oklch(0.18 0.015 250)) - Ratio 6.8:1 ✓
 
 ## Font Selection
-Typography should be bold and contemporary with excellent readability on small screens, combining geometric precision with organic warmth.
+Typefaces should prioritize readability and technical precision with a modern, clean aesthetic suitable for developer tools.
 
 - **Typographic Hierarchy**: 
-  - H1 (Card Title): Space Grotesk Bold/24px/tight leading (-0.02em letter spacing)
-  - H2 (Section Headers): Space Grotesk SemiBold/18px/normal leading
-  - Body (Card Description): Inter Regular/15px/relaxed leading (1.6)
-  - Small (Metadata): Inter Medium/13px/normal leading/muted color
+  - H1 (Page Title): JetBrains Mono Bold/32px/tight leading
+  - H2 (Agent Name): Space Grotesk SemiBold/20px/normal leading
+  - H3 (Section Headers): Space Grotesk Medium/16px/normal leading
+  - Body (Descriptions): Inter Regular/14px/relaxed leading (1.5)
+  - Code/Technical: JetBrains Mono Regular/13px/1.4 leading
+  - Small (Metadata): Inter Regular/12px/muted color
 
 ## Animations
-Animations should reinforce the mobile-native feel with spring physics and gesture-based interactions - the heart animation should be a satisfying micro-interaction with scale and color changes, card transitions should feel fluid with momentum-based scrolling, and the pull-to-refresh should have elastic resistance that builds anticipation.
+Animations should be subtle and purposeful - focus on smooth transitions between views, gentle hover states on interactive elements, and micro-interactions for button presses. Avoid flashy effects; instead use physics-based easing (spring or ease-out) for a polished, professional feel.
 
 ## Component Selection
 - **Components**: 
-  - Card: Content container with image, title, description, and action buttons (custom with elevated shadow and rounded corners)
-  - Button: Primary and ghost variants for navigation and actions (shadcn Button with custom styling)
-  - Tabs: Bottom navigation for switching between Feed and Favorites (shadcn Tabs with mobile-optimized touch targets)
-  - ScrollArea: Smooth scrolling container for content feed and horizontal category filter (shadcn ScrollArea)
-  - Badge: Status indicators and tags on content cards (shadcn Badge)
-  - Toast: Feedback for actions like liking and sharing (sonner)
+  - Card: Agent cards with metadata, capabilities, and action buttons (shadcn Card)
+  - Button: Primary and outline variants (shadcn Button)
+  - Tabs: Navigation between Agents, Conversations, and Favorites (shadcn Tabs)
+  - ScrollArea: Smooth scrolling for agent list and conversations (shadcn ScrollArea)
+  - Badge: Status indicators and category tags (shadcn Badge)
+  - Textarea: Message input for conversations (shadcn Textarea)
+  - Avatar: Agent identification in conversation view (shadcn Avatar)
+  - Dialog: Agent details and conversation settings (shadcn Dialog)
+  - Toast: Feedback for actions (sonner)
 - **Customizations**: 
-  - Custom CardStack component for swipeable content cards with gesture handlers
-  - Custom HeartButton with animated SVG that scales and changes color on interaction
-  - Custom PullToRefresh wrapper with elastic physics
-  - Custom CategoryFilter with horizontal scrolling pill buttons
+  - Custom AgentCard component with capability tags and quick-start button
+  - Custom ConversationView with message bubbles and input area
+  - Custom CategoryFilter for agent filtering
+  - Custom MessageBubble with sender identification
 - **States**: 
-  - Buttons: Default (gradient background), Pressed (scale 0.95 + darker), Disabled (50% opacity)
-  - Category Pills: Inactive (secondary background), Active (primary background + shadow), Pressed (scale 0.95)
-  - Cards: Default (elevated), Hover/Press (scale 1.02), Swiping (transform follows gesture)
-  - Heart: Unliked (outline), Liked (filled + scale pulse), Animating (spring bounce)
+  - Buttons: Default (solid background), Hover (slight brightness increase), Pressed (scale 0.98), Disabled (40% opacity)
+  - Agent Cards: Default (elevated), Hover (border glow), Selected (primary border), Pinned (star indicator)
+  - Category Pills: Inactive (muted background), Active (primary background), Hover (scale 1.02)
+  - Messages: Sent (primary background), Received (surface background), Sending (reduced opacity)
 - **Icon Selection**: 
-  - Heart for likes (Phosphor Heart/HeartFilled)
-  - Share for sharing (Phosphor ShareFat)
-  - Grid for favorites (Phosphor SquaresFour)
-  - Feed for home (Phosphor Sparkle)
-  - Arrow for navigation (Phosphor ArrowLeft)
+  - Bot for agents (Phosphor Robot)
+  - Chat for conversations (Phosphor ChatCircle)
+  - Star for favorites (Phosphor Star/StarFilled)
+  - Funnel for filter (Phosphor Funnel)
+  - Paper plane for send (Phosphor PaperPlaneTilt)
+  - Pin for pinned agents (Phosphor PushPin)
+  - Plus for new conversation (Phosphor Plus)
 - **Spacing**: 
-  - Container padding: px-4 (16px) for main content
-  - Category filter: py-3 (12px vertical), gap-2 (8px between chips)
-  - Card gaps: gap-4 (16px) between cards in feed
+  - Container padding: px-4 md:px-6 (16px/24px)
+  - Category filter: py-3 gap-2 (12px vertical, 8px horizontal)
+  - Card gaps: gap-4 (16px) in grid layouts
   - Section spacing: mb-6 (24px) between major sections
-  - Button padding: px-6 py-3 for primary CTAs (24px/12px)
-  - Grid gaps: gap-3 (12px) for favorites grid
+  - Message spacing: gap-2 (8px) between messages
+  - Button padding: px-4 py-2 for standard buttons
 - **Mobile**: 
-  - Single column layout throughout
-  - Horizontal scrolling category filter with pill buttons below header
-  - Bottom navigation bar (sticky) with large touch targets (min 44px)
-  - Cards occupy 90% viewport width with side margins for swipe affordance
-  - Favorites grid uses 2 columns on mobile, 3 on larger devices
-  - Pull-to-refresh gesture enabled only on feed view
+  - Single column layout for agent cards on mobile, 2 columns on tablet, 3 on desktop
+  - Bottom navigation bar with large touch targets
+  - Conversation view optimized for mobile with sticky input at bottom
+  - Collapsible agent details for space efficiency
+  - Horizontal scrolling category filter
   - Safe area padding for notched devices
-  - Horizontal scroll disabled on main feed to prevent conflicts with swipe gestures
