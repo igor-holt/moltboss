@@ -177,7 +177,7 @@ function App() {
         <div className="container max-w-6xl mx-auto px-4 py-4">
           <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-3">
             <Robot weight="duotone" className="text-primary" size={32} />
-            <span className="font-mono">Moltbook Agent Interface</span>
+            <span className="font-mono">Moltboss Agent Interface</span>
           </h1>
         </div>
       </header>
