@@ -1,6 +1,6 @@
 # Planning Guide
 
-An agentic interface for Copilot to discover, engage with, and manage conversations with Moltboss.com bot agents.
+An agentic interface for Copilot to discover, engage with, and manage conversations with Moltboss.org bot agents.
 
 **Experience Qualities**: 
 1. **Professional** - Clean, focused interface that prioritizes functionality and clarity for productive agent interactions
@@ -13,7 +13,7 @@ This is an agent management and conversation interface with persistent state for
 ## Essential Features
 
 ### Agent Discovery
-- **Functionality**: Browse available Moltboss.com bot agents in a card-based interface showing agent name, capabilities, description, and specialization
+- **Functionality**: Browse available Moltboss.org bot agents in a card-based interface showing agent name, capabilities, description, and specialization
 - **Purpose**: Allows Copilot to discover and understand available agents before initiating conversations
 - **Trigger**: User opens the app or navigates to the Agents tab
 - **Progression**: App loads → Display agent cards with metadata → User browses agents → Select agent → View detailed capabilities → Initiate conversation
@@ -57,7 +57,7 @@ This is an agent management and conversation interface with persistent state for
 ## Edge Case Handling
 - **No Agents Available**: Show empty state with message explaining agent loading or connection issues
 - **Empty Conversations**: Encourage user to start first conversation with suggested agents
-- **Connection Errors**: Display retry mechanism when unable to reach Moltboss.com
+- **Connection Errors**: Display retry mechanism when unable to reach Moltboss.org
 - **Long Messages**: Implement message truncation with expand option in conversation list
 - **Agent Unavailable**: Show status indicator and alternative agent suggestions
 - **Rate Limiting**: Display graceful message when API limits reached with retry timer
